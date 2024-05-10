@@ -20,8 +20,7 @@ public class SimpleMoveScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.tag);
         if(other.gameObject.CompareTag(BoundaryColliderTag))
-            Destroy(gameObject);
+            gameObject.SetActive(false);
     }
 }
