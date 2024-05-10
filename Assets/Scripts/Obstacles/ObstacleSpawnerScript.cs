@@ -5,8 +5,6 @@ public class ObstacleSpawnerScript : MonoBehaviour
     public GameObject Obstacle;
     public Vector2 SpawnXCoordinates;
     public Vector2 SpawnYCoordinates;
-
-    public Vector2 Coordinates;
     
     private void Start()
     {
