@@ -6,6 +6,7 @@ public class SceneController : MonoBehaviour
     private static SceneController _instance;
     public static SceneController Instance { get { return _instance; } }
     public static int Score { get; set; } = 0;
+    public static bool IsWinning = false;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class SceneController : MonoBehaviour
     public static void StartGame()
     {
         Score = 0;
+        IsWinning = false;
         SceneManager.LoadScene("Game");
     }
 

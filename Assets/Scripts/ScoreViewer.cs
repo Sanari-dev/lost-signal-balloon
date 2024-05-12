@@ -9,7 +9,15 @@ public class ScoreViewer : MonoBehaviour
     {
         var scoreText = GetComponent<TextMeshProUGUI>();
         var score = SceneController.Score.ToString();
-        scoreText.text = $"Your time: {score}"; 
+        if(SceneController.IsWinning)
+        {
+            scoreText.text = $"You got it in {score} seconds";
+        }
+        else
+        {
+            scoreText.text = $"You have been trying for {score} seconds and failed";
+        }
+        
     }
 
     // Update is called once per frame

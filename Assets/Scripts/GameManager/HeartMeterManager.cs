@@ -18,7 +18,7 @@ public class HeartMeterManager : MonoBehaviour
 
     private void Start()
     {
-        CurrentHeartValue = MaxHeartValue;
+        CurrentHeartValue = MaxHeartValue / 2;
         IsLostConnection = true;
         _fillMeter.color = _colorFailed;
     }
@@ -35,7 +35,16 @@ public class HeartMeterManager : MonoBehaviour
             _fillMeter.color = _colorFailed;
             CurrentHeartValue -= Time.deltaTime * DecreaseRate;
             if(CurrentHeartValue <= 0)
+            {
+                SceneController.IsWinning = false;
                 SceneController.EndGame();
+            }
+                
+            else if(CurrentHeartValue >= MaxHeartValue)
+            {
+                SceneController.IsWinning = true;
+                SceneController.EndGame();
+            }
         }              
     }
 
