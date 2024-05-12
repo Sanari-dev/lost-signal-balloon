@@ -58,4 +58,10 @@ public class PlayerController : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.tag == "Boundary")
+            SceneController.EndGame();
+    }
 }

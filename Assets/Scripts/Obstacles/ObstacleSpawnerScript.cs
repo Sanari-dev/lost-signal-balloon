@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ObstacleSpawnerScript : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
     public Vector2 SpawnYCoordinates;
     public Transform ObjectPoolParentTransform;
     public float RepeatRate;
+    public bool FromLeft;
 
     public static ObstacleSpawnerScript ObstacleSpawner;
     public List<GameObject> ObjectPools;
@@ -20,6 +22,14 @@ public class ObstacleSpawnerScript : MonoBehaviour
         for (var i = 0; i < MaxObjectAmount; i++)
         {
             var obj = Instantiate(Obstacle, new Vector3(0, SpawnYCoordinates.y + 5), Quaternion.identity);
+            if (!FromLeft)
+            {
+                obj.GetComponent<SimpleMoveScript>().MoveToRight = false;
+                Vector3 scale = obj.transform.localScale;
+                scale.x *= -1;
+                obj.transform.localScale = scale;
+            }
+
             obj.SetActive(false);
             ObjectPools.Add(obj);
         }
@@ -32,9 +42,12 @@ public class ObstacleSpawnerScript : MonoBehaviour
 
     private void SpawnObstacle()
     {
-        var yPos = Random.Range(SpawnYCoordinates.x, SpawnYCoordinates.y);
+        var yPos = Random.Range(transform.position.y - 8, transform.position.y + 8);
         var obj = GetObjectFromPool();
-        obj.transform.position = new Vector3(SpawnXCoordinates.x, yPos);
+        if (FromLeft)
+            obj.transform.position = new Vector3(SpawnXCoordinates.x, yPos);
+        else
+            obj.transform.position = new Vector3(SpawnXCoordinates.y, yPos);
         obj.SetActive(true);
     }
 

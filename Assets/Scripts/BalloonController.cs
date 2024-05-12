@@ -80,7 +80,7 @@ public class BalloonController : MonoBehaviour
             if (_air > 2.5)
                 _air = 2.5f;
 
-            _rb2D.AddForce(transform.up * _air / 2);
+            _rb2D.AddForce(transform.up * _air / 3);
         }
         else
         {
@@ -88,7 +88,7 @@ public class BalloonController : MonoBehaviour
             if (_air < 1)
                 _air = 1;
 
-            _rb2D.AddForce(transform.up * 0);
+            _rb2D.AddForce(transform.up * _air / 3);
         }
 
         _balloonTransform.localScale = Vector3.one * _air;
