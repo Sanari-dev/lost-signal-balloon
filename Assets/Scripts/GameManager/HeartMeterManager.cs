@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeartMeterManager : MonoBehaviour
 {
@@ -8,19 +9,34 @@ public class HeartMeterManager : MonoBehaviour
 
     [SerializeField]
     private float CurrentHeartValue;
+    [SerializeField]
+    private Color _colorFailed;
+    [SerializeField]
+    private Color _colorConnect;
+    [SerializeField]
+    private Image _fillMeter;
 
     private void Start()
     {
         CurrentHeartValue = MaxHeartValue;
         IsLostConnection = true;
+        _fillMeter.color = _colorFailed;
     }
 
     private void Update()
     {
         if (!IsLostConnection)
-            return;
-        
-        CurrentHeartValue -= Time.deltaTime * DecreaseRate;        
+        {
+            _fillMeter.color = _colorConnect;
+            CurrentHeartValue += Time.deltaTime * DecreaseRate/4;
+        }
+        else
+        {
+            _fillMeter.color = _colorFailed;
+            CurrentHeartValue -= Time.deltaTime * DecreaseRate;
+            if(CurrentHeartValue <= 0)
+                SceneController.EndGame();
+        }              
     }
 
     public float GetCurrentHeartValue()

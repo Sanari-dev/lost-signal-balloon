@@ -8,6 +8,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
     public Vector2 SpawnXCoordinates;
     public Vector2 SpawnYCoordinates;
     public Transform ObjectPoolParentTransform;
+    public float RepeatRate;
 
     public static ObstacleSpawnerScript ObstacleSpawner;
     public List<GameObject> ObjectPools;
@@ -26,7 +27,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(SpawnObstacle), 0, 3f);
+        InvokeRepeating(nameof(SpawnObstacle), 0, RepeatRate);
     }
 
     private void SpawnObstacle()

@@ -16,6 +16,8 @@ public class BalloonController : MonoBehaviour
     private float _airIncrease = 2f;
     [SerializeField]
     private int _multiplier = 10000;
+    [SerializeField]
+    private AudioSource _pumpSound;
 
     private Rigidbody2D _rb2D;
     private bool _isPumping = false;
@@ -42,21 +44,32 @@ public class BalloonController : MonoBehaviour
 
     public void HandleTriggerEnter(ObjectTypeEnum type, string collide)
     {
-        print($"{type}, { collide}");
         if (type == ObjectTypeEnum.Pump && collide == "Player")
+        {
             _isPumping = true;
+            _pumpSound.Play();
+        }
+
 
         if (type == ObjectTypeEnum.Receiver && collide == "Signal")
+        {
             HeartMeterManager.IsLostConnection = false;
+        }
     }
 
     public void HandleTriggerExit(ObjectTypeEnum type, string leave)
     {
         if (type == ObjectTypeEnum.Pump && leave == "Player")
+        {
             _isPumping = false;
+            _pumpSound.Stop();
+        }
+            
 
         if (type == ObjectTypeEnum.Receiver && leave == "Signal")
+        {
             HeartMeterManager.IsLostConnection = true;
+        }            
     }
 
     private void UpdateBalloon()
@@ -67,7 +80,7 @@ public class BalloonController : MonoBehaviour
             if (_air > 2.5)
                 _air = 2.5f;
 
-            _rb2D.AddForce(transform.up * _air/2);
+            _rb2D.AddForce(transform.up * _air / 2);
         }
         else
         {

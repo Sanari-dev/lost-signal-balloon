@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveToRight: 1
-  SpeedRange: {x: 1, y: 4}
+  SpeedRange: {x: 4, y: 8}
 --- !u!61 &7440453202101527228
 BoxCollider2D:
   m_ObjectHideFlags: 0
