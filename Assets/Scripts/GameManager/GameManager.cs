@@ -7,11 +7,18 @@ public class GameManager : MonoBehaviour
 {
     public HeartMeterManager HeartMeterManager;
     [SerializeField]
-    private Slider HeartMeterUI;
+    private BalloonController _balloonController;
+    [SerializeField]
+    private Slider _heartMeterUI;
+
+    private void Awake()
+    {
+        _balloonController.HeartMeterManager = HeartMeterManager;
+    }
 
     private void Update()
     {
-        HeartMeterUI.value = HeartMeterManager.GetCurrentHeartValue();
+        _heartMeterUI.value = HeartMeterManager.GetCurrentHeartValue();
     }
 
 }

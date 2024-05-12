@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HeartMeterManager : MonoBehaviour
 {
@@ -12,7 +11,8 @@ public class HeartMeterManager : MonoBehaviour
 
     private void Start()
     {
-        CurrentHeartValue = MaxHeartValue;        
+        CurrentHeartValue = MaxHeartValue;
+        IsLostConnection = true;
     }
 
     private void Update()

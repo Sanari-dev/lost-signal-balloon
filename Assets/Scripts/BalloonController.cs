@@ -5,8 +5,6 @@ using UnityEngine;
 public class BalloonController : MonoBehaviour
 {
     [SerializeField]
-    private HeartMeterManager heartMeterManager;
-    [SerializeField]
     private Transform _balloonTransform;
     [SerializeField]
     private List<TriggerController> _triggerObjects;
@@ -20,7 +18,8 @@ public class BalloonController : MonoBehaviour
     private int _multiplier = 10000;
 
     private Rigidbody2D _rb2D;
-    public bool _isPumping = false;
+    private bool _isPumping = false;
+    public HeartMeterManager HeartMeterManager { get; set; }
 
     private void Awake()
     {
@@ -43,30 +42,21 @@ public class BalloonController : MonoBehaviour
 
     public void HandleTriggerEnter(ObjectTypeEnum type, string collide)
     {
-        switch (type)
-        {
-            case ObjectTypeEnum.Pump when collide == "Player":
-                _isPumping = true;
-                break;
-            case ObjectTypeEnum.Receiver when collide == "Signal":
-                heartMeterManager.IsLostConnection = false;
-                break;
-            default: break;
-        }
+        print($"{type}, { collide}");
+        if (type == ObjectTypeEnum.Pump && collide == "Player")
+            _isPumping = true;
+
+        if (type == ObjectTypeEnum.Receiver && collide == "Signal")
+            HeartMeterManager.IsLostConnection = false;
     }
 
     public void HandleTriggerExit(ObjectTypeEnum type, string leave)
     {
-        switch (type)
-        {
-            case ObjectTypeEnum.Pump when leave == "Player":
-                _isPumping = false;
-                break;
-            case ObjectTypeEnum.Receiver when leave == "Signal":
-                heartMeterManager.IsLostConnection = true;
-                break;
-            default: break;
-        }
+        if (type == ObjectTypeEnum.Pump && leave == "Player")
+            _isPumping = false;
+
+        if (type == ObjectTypeEnum.Receiver && leave == "Signal")
+            HeartMeterManager.IsLostConnection = true;
     }
 
     private void UpdateBalloon()
@@ -77,7 +67,7 @@ public class BalloonController : MonoBehaviour
             if (_air > 2.5)
                 _air = 2.5f;
 
-            _rb2D.AddForce(transform.up * _air);
+            _rb2D.AddForce(transform.up * _air/2);
         }
         else
         {
