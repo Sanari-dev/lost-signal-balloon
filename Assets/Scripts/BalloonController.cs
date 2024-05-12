@@ -47,7 +47,8 @@ public class BalloonController : MonoBehaviour
         if (type == ObjectTypeEnum.Pump && collide == "Player")
         {
             _isPumping = true;
-            _pumpSound.Play();
+            if (!_pumpSound.isPlaying)
+                _pumpSound.Play();
         }
 
 
@@ -62,7 +63,8 @@ public class BalloonController : MonoBehaviour
         if (type == ObjectTypeEnum.Pump && leave == "Player")
         {
             _isPumping = false;
-            _pumpSound.Stop();
+            if(!_pumpSound.isPlaying)
+                _pumpSound.Stop();
         }
             
 
