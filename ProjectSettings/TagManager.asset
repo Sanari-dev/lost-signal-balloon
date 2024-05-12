@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Boundary
+  - Pump
+  - Left
+  - Right
+  - Obstacle
+  - Reciever
   layers:
   - Default
   - TransparentFX

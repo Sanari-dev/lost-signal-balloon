@@ -12,11 +12,11 @@ public class CirclingRandomMovement : MonoBehaviour
     
     private void FixedUpdate()
     {
-        var distance = Vector2.Distance(NextPosition, transform.position);
+        var distance = Vector2.Distance(NextPosition, transform.localPosition);
         
         if (distance >= MinimumDistanceBeforeFindingNewPosition)
         {
-            transform.position = Vector2.MoveTowards(transform.position, NextPosition, Speed * Time.deltaTime);
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, NextPosition, Speed * Time.deltaTime);
             return;
         }
             
@@ -28,6 +28,6 @@ public class CirclingRandomMovement : MonoBehaviour
 
     private void HandleAnimation()
     {
-        transform.localScale = NextPosition.x - transform.position.x >= 0 ? new Vector3(1f,1f,1f) : new Vector3(-1f,1f,1f);
+        transform.localScale = NextPosition.x - transform.localPosition.x >= 0 ? new Vector3(1f,1f,1f) : new Vector3(-1f,1f,1f);
     }
 }

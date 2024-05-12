@@ -18,8 +18,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
         ObjectPools = new List<GameObject>();
         for (var i = 0; i < MaxObjectAmount; i++)
         {
-            var obj = Instantiate(Obstacle, new Vector3(0, SpawnYCoordinates.y + 5), Quaternion.identity,
-                ObjectPoolParentTransform);
+            var obj = Instantiate(Obstacle, new Vector3(0, SpawnYCoordinates.y + 5), Quaternion.identity);
             obj.SetActive(false);
             ObjectPools.Add(obj);
         }
